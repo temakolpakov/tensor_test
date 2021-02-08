@@ -1,0 +1,82 @@
+Append integer to beginning of list in Python - Stack Overflow
+
+Join Stack Overflow to learn, share knowledge, and build your career.
+
+Teams
+
+Q&A for Work
+
+Stack Overflow for Teams is a private, secure spot for you and
+                
+            your coworkers to find and share information.
+
+I have an integer and a list. I would like to make a new list of them beginning
+with the variable and ending with the list.
+Writing a + list I get errors. The
+compiler handles a as integer, thus I cannot use append, or extend either. 
+How
+would you do this?
+
+How it works:
+
+array.insert(index, value)
+
+Insert an item at a given position. The first argument is the index of the
+element before which to insert, so array.insert(0, x) inserts at the front of
+the list, and array.insert(len(array), x) is equivalent to
+array.append(x).Negative values are treated as being relative to the end of the
+array.
+
+Note that if you are trying to do that operation often, especially in loops, a
+list is the wrong data structure.
+
+Lists are not optimized for modifications at the front, and somelist.insert(0,
+something) is an O(n) operation [https://wiki.python.org/moin/TimeComplexity.]
+
+somelist.pop(0) and del somelist[0] are also O(n) operations.
+
+The correct data structure to use is a deque
+[https://docs.python.org/2/library/collections.html#collections.deque] from the
+collections module. deques expose an interface that is similar to those of
+lists, but are optimized for modifications from both endpoints. They have an
+appendleft method for insertions at the front.
+
+Demo:
+
+Another way of doing the same,
+
+You can use Unpack list:
+
+a = 5
+
+li = [1,2,3]
+
+li = [a, *li]
+
+=> [5, 1, 2, 3]
+
+Based on some (minimal) benchmarks using the timeit module it seems that the
+following has similar if not better performance than the accepted answer
+
+As with [a] + list this will create a new list and not mutate lst.
+
+If your intention is to mutate the list then use lst.insert(0, a).
+
+[NOTE]:
+
+collections.deque is faster than Python pure list in a loop Relevant-Post
+[https://stackoverflow.com/a/23487658/3702377.]
+
+New lists can be made by simply adding lists together.
+
+None of these worked for me. I converted the first element to be part of a
+series (a single element series), and converted the second element also to be a
+series, and used append function.
+
+make sure that ur_data is of string type
+so if u have data= int(5) convert it to
+ ur_data = str(data)
+
+site design / logo © 2021 Stack Exchange Inc; user contributions licensed under
+cc by-sa [https://stackoverflow.com/help/licensing.]                   
+rev 2021.2.5.38499
