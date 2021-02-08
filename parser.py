@@ -17,6 +17,7 @@ class Parser:
         self.lines = None
         self.text = None
         self.formatted_text = None
+        self.file_name = None
 
     def get_lines(self):
         """
@@ -109,5 +110,7 @@ class Parser:
         if not os.path.isdir(base_path+'/'.join(splitted_url[:-1])):
             os.makedirs(base_path+'/'.join(splitted_url[:-1]))
 
-        with open(base_path+'/'.join(splitted_url)+'.txt', 'w') as f:
+        self.file_name = base_path+'/'.join(splitted_url)+'.txt'
+        with open(self.file_name, 'w') as f:
             f.write(self.formatted_text)
+        return self.file_name

@@ -8,7 +8,7 @@ import click
 def main(url):
     parser_obj = Parser(url)
     parser_obj.get_formatted_text(settings.splitter, settings.re_url)
-    parser_obj.save_to_file(settings.base_dir)
+    print(parser_obj.save_to_file(settings.base_dir))
 
 
 if __name__ == '__main__':
